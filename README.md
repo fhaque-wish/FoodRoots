@@ -2,8 +2,6 @@
 
 Discover the ancestry and cultural evolution of your favorite modern-day dishes using Generative AI! Simply enter the name of a dish, and this app traces its historical origins, transformations, and regional variants — all displayed in a clean, readable format.
 
-![screenshot](https://via.placeholder.com/800x400.png?text=Demo+Screenshot)
-
 ---
 
 ## ✨ Features
