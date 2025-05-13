@@ -1,6 +1,6 @@
 import streamlit as st
 import openai
-import os
+from openai import OpenAI
 
 # Title and Description
 st.title("🍜 Food Lineage Explorer")
@@ -9,8 +9,8 @@ st.write("Discover the ancestry and evolution of your favorite foods. Enter a mo
 # Input food name
 food_name = st.text_input("Enter a modern food name (e.g., 'Ramen', 'Pizza')")
 
-# OpenAI API Key from Streamlit secrets
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# OpenAI Client from Streamlit secrets
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Function to call GPT-4o
 @st.cache_data(show_spinner=False)
@@ -20,13 +20,13 @@ def get_food_lineage(food):
     Include its ancient origins, key transformation points, regional variants, and how it became today's version.
     Present the output in a chronological format, optionally suggesting a lineage diagram in text.
     """
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
         max_tokens=1000
     )
-    return response['choices'][0]['message']['content']
+    return response.choices[0].message.content
 
 # Trigger API call
 if st.button("Trace Lineage") and food_name:
